@@ -350,7 +350,7 @@ def registrar_nota(alumnos, pila_undo):
     alumno.agregar_nota(nota)
 
     # Se guarda la acción en la pila.
-    # La pila mantiene el orden LIFO.
+
     pila_undo.append(
         (cedula, nota)
     )
@@ -637,8 +637,7 @@ def main():
     profesores = cargar_profesores()
 
     # Pila para las acciones de notas.
-    # Cada elemento tiene:
-    # (Cédula del alumno, nota registrada)
+    
     pila_undo = []
 
     while True:
