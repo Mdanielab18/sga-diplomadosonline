@@ -1,0 +1,6 @@
+# Archivos generados por compilacion
+*.exe
+*.o
+
+# Reporte generado por el programa
+certificados_pendientes.txt
