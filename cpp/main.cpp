@@ -483,7 +483,7 @@ public:
 
     // ==================== OPCION 5 ====================
 
-    void generarCertificados() const {
+void generarCertificados() const {
     // Cola FIFO
     queue<Alumno*> colaCertificados;
 
@@ -498,9 +498,18 @@ public:
         ios::trunc
     );
 
-    archivo << "CERTIFICADOS PENDIENTES\n";
-    archivo << "Total de graduandos en cola: "
-            << colaCertificados.size() << "\n\n";
+    // Encabezado del reporte
+    string encabezado = "CERTIFICADOS PENDIENTES";
+    string total = "Total de graduandos en cola: " +
+                   to_string(colaCertificados.size());
+
+    // Mostrar en pantalla
+    cout << "\n" << encabezado << "\n";
+    cout << total << "\n\n";
+
+    // Guardar en el archivo
+    archivo << encabezado << "\n";
+    archivo << total << "\n\n";
 
     int posicion = 1;
 
@@ -508,16 +517,20 @@ public:
         Alumno* alumno = colaCertificados.front();
         colaCertificados.pop();
 
-        archivo << posicion << ". ["
-                << alumno->getCedula() << "] "
-                << alumno->getNombre() << "\n";
+        string linea = to_string(posicion) + ". [" +
+                       alumno->getCedula() + "] " +
+                       alumno->getNombre();
+
+        // Mostrar y guardar cada graduando
+        cout << linea << "\n";
+        archivo << linea << "\n";
 
         ++posicion;
     }
 
     archivo.close();
 
-    cout << "Cola generada correctamente en "
+    cout << "\nReporte generado correctamente en "
          << ARCHIVO_CERTIFICADOS << ".\n";
 }
 
