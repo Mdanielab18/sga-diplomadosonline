@@ -1,2 +1,4 @@
 *.class
 *.txt
+# Archivos de datos generados por Java
+java/*.txt

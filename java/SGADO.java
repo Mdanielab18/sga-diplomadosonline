@@ -303,6 +303,10 @@ System.out.println("Total de certificados: " + colaCertificados.size());
 
     private static void mostrarReporteGeneral() {
 
+         // Recargar los registros desde los archivos
+          alumnos = ArchivoUtil.cargarAlumnos();
+          profesores = ArchivoUtil.cargarProfesores();
+
         System.out.println("\n==================================================");
         System.out.println("              REPORTE GENERAL");
         System.out.println("==================================================");
@@ -341,18 +345,24 @@ System.out.println("Total de certificados: " + colaCertificados.size());
 
             for (Alumno alumno : alumnos) {
 
-                String estado = obtenerEstadoAlumno(alumno);
+              String estado = obtenerEstadoAlumno(alumno);
 
-                System.out.println(
-                        "Cédula: " + alumno.getCedula()
-                        + " | Nombre: " + alumno.getNombre()
-                        + " | Programa: " + alumno.getPrograma()
-                        + " | Notas: " + alumno.getNotas()
-                        + " | Promedio: "
-                        + String.format("%.2f", alumno.calcularPromedio())
-                        + " | Estado: " + estado
-                );
-            }
+              ArrayList<Double> notasReporte = new ArrayList<>(alumno.getNotas());
+
+              while (notasReporte.size() < 3) {
+              notasReporte.add(0.0);
+              }
+
+             System.out.println(
+                  "Cédula: " + alumno.getCedula()
+                 + " | Nombre: " + alumno.getNombre()
+                 + " | Programa: " + alumno.getPrograma()
+                 + " | Notas: " + notasReporte
+                 + " | Promedio: "
+                 + String.format("%.2f", alumno.calcularPromedio())
+                 + " | Estado: " + estado
+             );
+     }
         }
     }
 

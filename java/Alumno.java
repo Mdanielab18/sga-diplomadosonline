@@ -30,17 +30,17 @@ public class Alumno extends Persona {
         }
     }
 
-    public double calcularPromedio() {
-        if (notas.isEmpty()) {
-            return 0;
-        }
+    
+public double calcularPromedio() {
+    double suma = 0;
 
-        double suma = 0;
-
-        for (double nota : notas) {
-            suma += nota;
-        }
-
-        return suma / notas.size();
+    for (double nota : notas) {
+        suma += nota;
     }
+
+    // Siempre se consideran las tres evaluaciones.
+    
+    return suma / 3.0;
+}
+
 }

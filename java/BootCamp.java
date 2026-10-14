@@ -6,7 +6,7 @@ public class BootCamp extends ProgramaAcademico {
 
     @Override
     public boolean estudianteAprobado(Alumno alumno) {
-        if (alumno.getNotas().isEmpty()) {
+        if (alumno.getNotas().size() != 3) {
             return false;
         }
 

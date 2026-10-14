@@ -4,9 +4,12 @@ import java.util.Queue;
 
 public class ArchivoUtil {
 
+    
+     
     private static final String ARCHIVO_ALUMNOS = "alumnos.txt";
     private static final String ARCHIVO_PROFESORES = "profesores.txt";
     private static final String ARCHIVO_CERTIFICADOS = "certificados_pendientes.txt";
+
 
     // ==================================================
     // CREAR ARCHIVOS SI NO EXISTEN
@@ -64,21 +67,19 @@ public class ArchivoUtil {
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
         File archivo = new File(ARCHIVO_ALUMNOS);
-
-        if (!archivo.exists()) {
-            return alumnos;
-        }
+        
+    
 
         try (BufferedReader lector =
                      new BufferedReader(new FileReader(archivo))) {
 
             String linea;
 
-            while ((linea = lector.readLine()) != null) {
+          while ((linea = lector.readLine()) != null) {
 
-                if (linea.trim().isEmpty()) {
+               if (linea.trim().isEmpty()) {
                     continue;
-                }
+                 }
 
                 String[] datos = linea.split(",");
 
