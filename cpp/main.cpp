@@ -372,37 +372,49 @@ public:
 
     // ==================== OPCION 2 ====================
 
+    
     void registrarProfesor() {
-        string cedula, nombre, correo, especialidad, materia;
+    string cedula, nombre, correo, especialidad, materia;
 
-        cout << "\n--- REGISTRAR PROFESOR ---\n";
+    cout << "\n--- REGISTRAR PROFESOR ---\n";
 
-        cout << "Cedula/ID: ";
-        getline(cin, cedula);
+    cout << "Cedula/ID: ";
+    getline(cin, cedula);
 
-        cout << "Nombre completo: ";
-        getline(cin, nombre);
-
-        cout << "Correo: ";
-        getline(cin, correo);
-
-        cout << "Especialidad: ";
-        getline(cin, especialidad);
-
-        cout << "Materia: ";
-        getline(cin, materia);
-
-        profesores.push_back(
-            new Profesor(
-                cedula, nombre, correo,
-                especialidad, materia
-            )
-        );
-
-        guardarProfesores();
-
-        cout << "Profesor registrado correctamente.\n";
+    // Verificar si la cedula ya esta registrada
+    for (const auto& profesor : profesores) {
+        if (profesor->getCedula() == cedula) {
+            cout << "Error: ya existe un profesor registrado "
+                 << "con esa cedula.\n";
+            return;
+        }
     }
+
+    // Solicitar los datos solo si la cedula es nueva
+    cout << "Nombre completo: ";
+    getline(cin, nombre);
+
+    cout << "Correo: ";
+    getline(cin, correo);
+
+    cout << "Especialidad: ";
+    getline(cin, especialidad);
+
+    cout << "Materia: ";
+    getline(cin, materia);
+
+    profesores.push_back(
+        new Profesor(
+            cedula, nombre, correo,
+            especialidad, materia
+        )
+    );
+
+    guardarProfesores();
+
+    cout << "Profesor registrado correctamente.\n";
+}
+
 
     // ==================== OPCION 3 ====================
 

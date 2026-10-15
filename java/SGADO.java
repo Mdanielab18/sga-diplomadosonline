@@ -121,39 +121,51 @@ public class SGADO {
     // 2. REGISTRAR PROFESOR
     // ==================================================
 
+    
     private static void registrarProfesor() {
 
         System.out.println("\n--- REGISTRAR PROFESOR ---");
 
-        System.out.print("Cédula: ");
-        String cedula = scanner.nextLine();
+         System.out.print("Cédula: ");
+         String cedula = scanner.nextLine().trim();
 
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-
-        System.out.print("Correo: ");
-        String correo = scanner.nextLine();
-
-        System.out.print("Especialidad: ");
-        String especialidad = scanner.nextLine();
-
-        System.out.print("Materia: ");
-        String materia = scanner.nextLine();
-
-        Profesor profesor = new Profesor(
-                cedula,
-                nombre,
-                correo,
-                especialidad,
-                materia
-        );
-
-        profesores.add(profesor);
-
-        ArchivoUtil.guardarProfesores(profesores);
-
-        System.out.println("\nProfesor registrado correctamente.");
+    // Verificar si la cédula ya está registrada
+          for (Profesor profesorExistente : profesores) {
+               if (profesorExistente.getCedula().equalsIgnoreCase(cedula)) {
+                    System.out.println(
+                   "\nError: Ya existe un profesor registrado con esa cédula."
+              );
+               return;
+        }
     }
+
+         System.out.print("Nombre: ");
+         String nombre = scanner.nextLine();
+
+         System.out.print("Correo: ");
+         String correo = scanner.nextLine();
+
+         System.out.print("Especialidad: ");
+         String especialidad = scanner.nextLine();
+
+         System.out.print("Materia: ");
+         String materia = scanner.nextLine();
+
+         Profesor profesor = new Profesor(
+          cedula,
+          nombre,
+          correo,
+          especialidad,
+          materia
+      );
+
+         profesores.add(profesor);
+
+         ArchivoUtil.guardarProfesores(profesores);
+
+         System.out.println("\nProfesor registrado correctamente.");
+    }
+
 
     // ==================================================
     // 3. REGISTRAR NOTAS A UN ALUMNO
