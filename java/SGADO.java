@@ -87,35 +87,45 @@ public class SGADO {
     // 1. REGISTRAR ALUMNO
     // ==================================================
 
-    private static void registrarAlumno() {
+    
+private static void registrarAlumno() {
 
-        System.out.println("\n--- REGISTRAR ALUMNO ---");
+    System.out.println("\n--- REGISTRAR ALUMNO ---");
 
-        System.out.print("Cédula: ");
-        String cedula = scanner.nextLine();
+    System.out.print("Cédula: ");
+    String cedula = scanner.nextLine().trim();
 
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-
-        System.out.print("Correo: ");
-        String correo = scanner.nextLine();
-
-        System.out.print("Programa (Curso/Diplomado/BootCamp): ");
-        String programa = scanner.nextLine();
-
-        Alumno alumno = new Alumno(
-                cedula,
-                nombre,
-                correo,
-                programa
-        );
-
-        alumnos.add(alumno);
-
-        ArchivoUtil.guardarAlumnos(alumnos);
-
-        System.out.println("\nAlumno registrado correctamente.");
+    // Validar si la cédula ya está registrada
+    for (Alumno alumnoExistente : alumnos) {
+        if (alumnoExistente.getCedula().trim().equalsIgnoreCase(cedula)) {
+            System.out.println("\nError: Ya existe un alumno registrado con esa cédula.");
+            return;
+        }
     }
+
+    System.out.print("Nombre: ");
+    String nombre = scanner.nextLine();
+
+    System.out.print("Correo: ");
+    String correo = scanner.nextLine();
+
+    System.out.print("Programa (Curso/Diplomado/BootCamp): ");
+    String programa = scanner.nextLine();
+
+    Alumno alumno = new Alumno(
+            cedula,
+            nombre,
+            correo,
+            programa
+    );
+
+    alumnos.add(alumno);
+
+    ArchivoUtil.guardarAlumnos(alumnos);
+
+    System.out.println("\nAlumno registrado correctamente.");
+}
+
 
     // ==================================================
     // 2. REGISTRAR PROFESOR
