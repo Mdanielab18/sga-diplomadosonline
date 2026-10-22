@@ -87,7 +87,6 @@ public class SGADO {
     // 1. REGISTRAR ALUMNO
     // ==================================================
 
-    
 private static void registrarAlumno() {
 
     System.out.println("\n--- REGISTRAR ALUMNO ---");
@@ -97,26 +96,55 @@ private static void registrarAlumno() {
 
     // Validar si la cédula ya está registrada
     for (Alumno alumnoExistente : alumnos) {
-        if (alumnoExistente.getCedula().trim().equalsIgnoreCase(cedula)) {
-            System.out.println("\nError: Ya existe un alumno registrado con esa cédula.");
+        if (alumnoExistente.getCedula().trim()
+                .equalsIgnoreCase(cedula)) {
+            System.out.println(
+                "\nError: Ya existe un alumno registrado con esa cédula."
+            );
             return;
         }
     }
 
     System.out.print("Nombre: ");
-    String nombre = scanner.nextLine();
+    String nombre = scanner.nextLine().trim();
 
     System.out.print("Correo: ");
-    String correo = scanner.nextLine();
+    String correo = scanner.nextLine().trim();
 
-    System.out.print("Programa (Curso/Diplomado/BootCamp): ");
-    String programa = scanner.nextLine();
+    String programa;
+
+    // Validar el programa académico
+    while (true) {
+        System.out.print(
+            "Programa (Curso/Diplomado/BootCamp): "
+        );
+
+        programa = scanner.nextLine().trim();
+
+        if (programa.equalsIgnoreCase("Curso")) {
+            programa = "Curso";
+            break;
+        } else if (programa.equalsIgnoreCase("Diplomado")) {
+            programa = "Diplomado";
+            break;
+        } else if (programa.equalsIgnoreCase("BootCamp")) {
+            programa = "BootCamp";
+            break;
+        } else {
+            System.out.println(
+                "\nError: Programa académico no válido."
+            );
+            System.out.println(
+                "Ingrese Curso, Diplomado o BootCamp.\n"
+            );
+        }
+    }
 
     Alumno alumno = new Alumno(
-            cedula,
-            nombre,
-            correo,
-            programa
+        cedula,
+        nombre,
+        correo,
+        programa
     );
 
     alumnos.add(alumno);
